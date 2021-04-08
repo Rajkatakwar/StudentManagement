@@ -1,0 +1,60 @@
+<div class="main">
+    <div *ngIf="isSuccess">
+        <div class="modal2" id="dialog" style="text-align: center;" >
+            <p style="font-size: 40px; color: green;"><i class="fa fa-check-circle-o" style="font-size: 60px; float: none;" aria-hidden="true"></i></p>
+          
+            <p style="color: green; font-size: 30px;">Division added Successfully</p>
+            
+            <p><a href="/divisions" style="font-size: 20px;">Click here to refresh &nbsp;<i class="fa fa-sign-in" data-dismiss="modal2"></i></a>
+            </p>
+        </div>
+    </div>
+    <div *ngIf="add">
+        <div class="modal" id="dialog">
+            <div class="modal-header">
+                <div class="h4 modal-title">New Divison</div>
+                <button type="button" class="close" data-dismiss="modal" (click)=Close()>&times;</button>
+            </div>
+            <form [formGroup]="ConForm"> 
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" formControlName="Name">
+                </div>
+                <div class="text-right modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled] ="ConForm.invalid" data-dismiss="modal"  (click)=Create()>Create</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)=Close()>Cancel</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+    
+    <div style="text-align: center">
+        <h1>Student Management System</h1>
+    </div>  
+    <h3>Division Details</h3> 
+    <div class="text-right col-6">
+        <button class="btn btn-sm btn-primary" (click)=Close() data-toggle="modal" data-target="#dialog">+ Add
+            Division</button>
+    </div>
+    
+    <br>
+    <table class="table table-hover">
+        <tr>
+            <th>Division Id</th>
+            <th>Division Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tbody *ngFor="let d of divisionDetails; let i=index"> 
+            <tr> 
+                <td>{{d.id}}</td> 
+                <td>{{d.name}}</td>   
+                <td><a href="#" (click)=View(d.id) data-toggle="modal" data-target="#dialog"><span class="glyphicon glyphicon-eye-open" title="View Details"></span></a></td>   
+                <td><a href="#" (click)=Update(d.id) data-toggle="modal" data-target="#dialog"><span class="glyphicon glyphicon-edit" title="Edit Details" ></span></a></td>           
+                <td><a href="#" (click)=Delete(d.id) data-toggle="modal" data-target="#dialog"><span class="glyphicon glyphicon-trash" title="Delete Details"></span></a></td> 
+            </tr>             
+        </tbody> 
+    </table> 
+</div>
